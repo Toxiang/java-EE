@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.crm.mapper.BaseDictMapper">
+
+	<select id="getBaseDictByCode" parameterType="string" resultType="basedict">
+		SELECT
+		  `dict_id`,
+		  `dict_type_code`,
+		  `dict_type_name`,
+		  `dict_item_name`,
+		  `dict_item_code`,
+		  `dict_sort`,
+		  `dict_enable`,
+		  `dict_memo`
+		FROM `base_dict`
+		WHERE dict_type_code = #{code}
+	</select>
+
+</mapper>

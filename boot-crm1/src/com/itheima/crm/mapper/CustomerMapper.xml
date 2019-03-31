@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.crm.mapper.CustomerMapper">
+
+	<sql id="customer_where">
+		<where>
+			<if test="custName != null and custName != ''">
+				and c.`cust_name` LIKE '%${custName}%'
+			</if>
+			<if test="custSource != null and custSource != ''">
+				AND c.`cust_source` = #{custSource}
+			</if>
+			<if test="custIndustry != null and custIndustry != ''">
+				AND c.`cust_industry` = #{custIndustry}
+			</if>
+			<if test="custLevel != null and custLevel != ''">
+				AND c.`cust_level` = #{custLevel}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getCustomerByQueryVo" parameterType="queryvo" resultType="customer">
+		SELECT
+		  c.`cust_id`,
+		  c.`cust_name`,
+		  c.`cust_year`,
+		  s.`dict_item_name` `cust_source`,
+		  i.`dict_item_name` `cust_industry`,
+		  l.`dict_item_name` `cust_level`,
+		  c.`cust_ap`,
+		  c.`cust_part`,
+		  c.`cust_gra`,
+		  c.`cust_home`,
+		  c.`cust_createtime`
+		FROM `customer` c
+		LEFT JOIN base_dict s ON c.`cust_source`= s.`dict_id`
+		LEFT JOIN base_dict i ON c.`cust_industry` = i.`dict_id`
+		LEFT JOIN base_dict l ON c.`cust_level` = l.`dict_id`
+		<include refid="customer_where" />
+		LIMIT #{start}, #{rows};		
+	</select>
+	
+	<select id="getCountByQueryVo" parameterType="queryvo" resultType="int">
+		SELECT count(1)
+		FROM `customer` c
+		LEFT JOIN base_dict s ON c.`cust_source`= s.`dict_id`
+		LEFT JOIN base_dict i ON c.`cust_industry` = i.`dict_id`
+		LEFT JOIN base_dict l ON c.`cust_level` = l.`dict_id`
+		<include refid="customer_where" />
+	</select>
+	
+	<select id="getCustomerById" parameterType="int" resultType="customer" >
+		SELECT
+		  `cust_id`,
+		  `cust_name`,
+		  `cust_year`,
+		  `cust_source`,
+		  `cust_industry`,
+		  `cust_level`,
+		  `cust_ap`,
+		  `cust_part`,
+		  `cust_gra`,
+		  `cust_home`,
+		  `cust_createtime`
+		FROM `customer`
+		WHERE cust_id = #{id}
+	</select>
+	
+	<select id="seeCustomerById" parameterType="int" resultType="customer" >
+		SELECT
+		  `cust_id`,
+		  `cust_name`,
+		  `cust_year`,
+		  `cust_source`,
+		  `cust_industry`,
+		  `cust_level`,
+		  `cust_ap`,
+		  `cust_part`,
+		  `cust_gra`,
+		  `cust_home`,
+		  `cust_createtime`
+		FROM `customer`
+		WHERE cust_id = #{id}
+	</select>
+	
+	<update id="addCustomer" parameterType="customer">
+		INSERT INTO `customer` (`cust_id`, `cust_name`, `cust_source`, `cust_industry`, `cust_level`,
+		`cust_ap`,`cust_part`,`cust_gra`, `cust_year`,`cust_home`) VALUES 
+		(#{cust_id},#{cust_name},#{cust_source},#{cust_industry},#{cust_level},#{cust_ap},#{cust_part},
+		#{cust_gra},#{cust_year},#{cust_home});
+	</update>
+	
+	<update id="updateCustomer" parameterType="customer">
+		UPDATE `customer`
+		<set>
+			<if test="cust_name != null">
+				`cust_name` = #{cust_name},
+			</if>
+			<if test="cust_source != null and cust_source != ''">
+				`cust_source` = #{cust_source},
+			</if>
+			<if test="cust_industry != null and cust_industry != ''">
+				`cust_industry` = #{cust_industry},
+			</if>
+			<if test="cust_level != null and cust_level != ''">
+				`cust_level` = #{cust_level},
+			</if>
+			<if test="cust_ap != null and cust_ap != ''">
+				`cust_ap` = #{cust_ap},
+			</if>
+			<if test="cust_part != null and cust_part != ''">
+				`cust_part` = #{cust_part},
+			</if>
+			<if test="cust_gra != null and cust_gra != ''">
+				`cust_gra` = #{cust_gra},
+			</if>
+			<if test="cust_year != null and cust_year != ''">
+				`cust_year` = #{cust_year},
+			</if>
+			<if test="cust_home != null and cust_home != ''">
+				`cust_home` = #{cust_home},
+			</if>
+		</set>
+		WHERE `cust_id` = #{cust_id};
+	</update>
+	
+	<delete id="deleteCustomer" parameterType="int">
+		DELETE
+		FROM `customer`
+		WHERE `cust_id` = #{cust_id};
+	</delete>
+
+</mapper>

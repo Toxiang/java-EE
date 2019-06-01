@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="po.Res" table="T_RES">
+		<id name="resid" column="RESID">
+			<generator class="assigned" />
+		</id>
+		<property name="resname" column="RESNAME" />
+		<property name="resprice" column="RESPRICE" />
+		
+	</class>
+</hibernate-mapping>

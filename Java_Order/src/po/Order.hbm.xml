@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="po.Order" table="T_ORDER">
+		<id name="oid" column="OID">
+			<generator class="assigned" />
+		</id>
+		<property name="name" column="NAME" />
+		<property name="price" column="PRICE" />
+		<property name="num" column="NUM" />
+		
+	</class>
+</hibernate-mapping>

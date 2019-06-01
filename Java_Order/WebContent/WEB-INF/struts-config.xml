@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+  <form-beans>
+  	<form-bean name="resform" type="form.ResForm"></form-bean>
+  	<form-bean name="deleteaction" type="form.ResForm"></form-bean>
+  	<form-bean name="loginaction" type="form.LoginForm"></form-bean>
+  	<form-bean name="addaction" type="form.ResForm"></form-bean>
+  	<form-bean name="orderaction" type="form.OrderForm"></form-bean>
+
+  </form-beans>
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings>
+  	<action name="resform" path="/search" scope="request" type="org.springframework.web.struts.DelegatingActionProxy"/>
+  	<action name="deleteaction" path="/delete" scope="request" type="org.springframework.web.struts.DelegatingActionProxy"/>
+  	<action name="loginaction" path="/login" scope="request" type="org.springframework.web.struts.DelegatingActionProxy"/>
+  	<action name="addaction" path="/add" scope="request" type="org.springframework.web.struts.DelegatingActionProxy"/>
+  	<action name="orderaction" path="/order" scope="request" type="org.springframework.web.struts.DelegatingActionProxy"/>
+
+  </action-mappings>
+  <message-resources parameter="struts.ApplicationResources" />
+  <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+  	<set-property property="contextConfigLocation" value="/WEB-INF/applicationContext.xml"></set-property>
+  </plug-in>
+</struts-config>
+
